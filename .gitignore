@@ -1,0 +1,10 @@
+/conf.json
+/data/
+/.idea/
+/cloud function/conf.json
+/dash_app/tests/
+/ML/
+/ML/*
+*.json
+**/*.json
+ML/covid-19

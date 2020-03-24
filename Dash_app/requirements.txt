@@ -1,0 +1,5 @@
+certifi
+pandas
+dash
+gunicorn
+firebase_admin

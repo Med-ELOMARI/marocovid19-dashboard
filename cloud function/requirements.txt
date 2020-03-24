@@ -1,0 +1,5 @@
+beautifulsoup4
+pandas
+firebase_admin
+lxml
+html5lib
