@@ -138,7 +138,7 @@ def time_update_callback(data_json):
 def left_indicator_callback(data_json):
     return dcc.Markdown(
         "**<sup>{}</sup>/<sub>{}</sub>**".format(
-            data_json["data"]["Infected"], data_json["data"]["Tested"]
+            data_json["data"]["Infected"], data_json["data"]["Infected"] + data_json["data"]["Tested"]
         ),
         dangerously_allow_html=True,
         style=dict(sub={"color": "blue"}),
@@ -176,21 +176,6 @@ def right_indicator_callback(data_json):
 )
 def map_callback(map, data_json):
     return morocco_map(map, data_json)
-
-
-# # update table based on dropdown's value and df updates
-# @app.callback(
-#     Output("regions_table", "children"), [Input("data_json", "data")],
-# )
-# def regions_table_callback(data):
-#     df = pd.DataFrame.from_dict(data["data"]["tab_json"])
-#     df.rename(
-#         columns={"Nombre de cas confirmés": "Confirmed Cases", "Région": "Province"},
-#         inplace=True,
-#     )
-#     df["Confirmed Cases"] = df["Confirmed Cases"].astype("int32")
-#     df = df.reindex(columns=list(df.columns)[::-1])
-#     return df_to_table(df)
 
 
 def make_line_graph(x, y, title, color):
@@ -292,7 +277,7 @@ def render_content(tab, data):
                         }
                         for map in MAPS_LIST
                     ],
-                    value="stamen-watercolor",
+                    value="carto-positron",
                     clearable=False,
                 ),
             ), dcc.Graph(
