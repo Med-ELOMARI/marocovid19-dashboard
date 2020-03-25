@@ -100,7 +100,7 @@ layout = [
                     dcc.Tabs(id="tabs", value='tab-1', children=[
                         dcc.Tab(label='Map', value='tab-1'),
                         dcc.Tab(label='Table', value='tab-2'),
-                    ],  colors={
+                    ], colors={
                         "border": "white",
                         "primary": "gray",
                         "background": "#e8e8e8"
