@@ -1,18 +1,6 @@
-import firebase_admin
-from firebase_admin import credentials
-
 from scrap import Scrapper, convert_to_date
 
-cred = credentials.Certificate("conf.json")  # conf.json not included in the repo
-
-firebase_admin.initialize_app(
-    cred, {"databaseURL": "https://covid19maroc-632de.firebaseio.com"}
-)
-# Import database module.
-from firebase_admin import db
-
-# Get a database reference to our blog.
-morocco = db.reference("maroc")
+from Database import morocco
 
 url = "http://www.covidmaroc.ma/Pages/AccueilAR.aspx"
 headers = {
@@ -68,15 +56,14 @@ def function(request):
         return "Noting to Update"
 
 
-if __name__ == "__main__":
-    sc = Scrapper(
-        url,
-        headers,
-        date_selector,
-        Tested_selector,
-        Infected_selector,
-        Recovered_Died_selector,
-        table_selector,
-    )
-    data = sc.get_data()  # Scrapped Data
-    print(data)
+# if __name__ == "__main__":
+#     sc = Scrapper(
+#         url,
+#         headers,
+#         date_selector,
+#         Tested_selector,
+#         Infected_selector,
+#         Recovered_Died_selector,
+#         table_selector,
+#     )
+#     data = sc.get_data()  # Scrapped Data

@@ -2,7 +2,6 @@
 /data/
 /.idea/
 /cloud function/conf.json
-/dash_app/tests/
 /ML/
 /ML/*
 *.json
