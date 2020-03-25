@@ -94,6 +94,19 @@ layout = [
                 ],
             ),
             html.Div(
+                id="time_line_container",
+                className="time_line pretty_container",
+                children=[
+                    dcc.Graph(
+                        id="time_line",
+                        config={
+                            "displaylogo": False,
+                            "modeBarButtonsToRemove": MODE_BAR_TIME_LINE_HIDES,
+                        },
+                    ),
+                ],
+            ),
+            html.Div(
                 id="regions_map_data",
                 className="chart_div pretty_container",
                 children=[
@@ -108,19 +121,7 @@ layout = [
                     html.Div(id='tabs-content'),
                 ],
             ),
-            html.Div(
-                id="time_line_container",
-                className="time_line pretty_container",
-                children=[
-                    dcc.Graph(
-                        id="time_line",
-                        config={
-                            "displaylogo": False,
-                            "modeBarButtonsToRemove": MODE_BAR_TIME_LINE_HIDES,
-                        },
-                    ),
-                ],
-            ),
+
             # html.Div(id="regions_table", className="row pretty_container table"),
         ],
     ),

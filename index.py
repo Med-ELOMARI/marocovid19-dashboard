@@ -54,7 +54,7 @@ app.layout = html.Div(
             href="https://fonts.googleapis.com/css?family=Ubuntu", rel="stylesheet"
         ),
     ],
-    className="row",
+    className="row landscape_switcher",
     style={
         # "margin": "0%",
         # "background-image": 'url(/assets/header.png)',
@@ -95,4 +95,4 @@ def show_menu(n_clicks, tabs_style):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=80)
