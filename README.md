@@ -1,8 +1,21 @@
 # Dash
+Current Demo is here : [url](https://polar-refuge-68443.herokuapp.com/)
 
+![](images/Screenshot.png)
+ 
+# Structure
+
+![](images/structure.png)
+
+the conf.json for cloud function not included (only read-only.json) 
 ## Getting Started
 
-### Running the app locally
+### Deploy this app to your account
+
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+### Or Run the app locally
 
 First create a virtual environment with conda or venv inside a temp folder, then activate it.
 
@@ -39,3 +52,5 @@ python index.py
 
 - [Dash](https://dash.plot.ly/) - Main server and interactive components
 - [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
+- Google Cloud Function
+- Purely Python 
