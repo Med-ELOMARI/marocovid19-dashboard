@@ -12,14 +12,14 @@ class Scrapper:
     """
 
     def __init__(
-            self,
-            url,
-            headers,
-            date_selector,
-            Tested_selector,
-            Infected_selector,
-            Recovered_Died_selector,
-            table_selector,
+        self,
+        url,
+        headers,
+        date_selector,
+        Tested_selector,
+        Infected_selector,
+        Recovered_Died_selector,
+        table_selector,
     ):
         self.table_selector = table_selector
         self.Recovered_Died_selector = Recovered_Died_selector
@@ -81,7 +81,7 @@ class Scrapper:
         return data.replace("\u200b", "").replace("\n", "")
 
 
-def convert_to_date(date, form  ="%Y-%m-%d"):
+def convert_to_date(date, form="%Y-%m-%d"):
     """
     ctime to %Y-%m-%d
     :param date:

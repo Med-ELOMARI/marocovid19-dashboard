@@ -30,9 +30,7 @@ def df_to_table(df):
         style_data={"whiteSpace": "normal", "height": "auto"},
         sort_action="native",
         column_selectable="single",
-        sort_by=[dict(column_id=df.columns[-1],
-                      direction='desc')]
-
+        sort_by=[dict(column_id=df.columns[-1], direction="desc")],
     )
 
 
@@ -41,7 +39,7 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text", ),
+            html.P(text, className="twelve columns indicator_text",),
         ],
         className="four columns indicator pretty_container",
     )
@@ -75,7 +73,7 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
@@ -112,18 +110,22 @@ layout = [
                 id="regions_map_data",
                 className="chart_div pretty_container",
                 children=[
-                    dcc.Tabs(id="tabs", value='tab-1', children=[
-                        dcc.Tab(label='Map', value='tab-1'),
-                        dcc.Tab(label='Table', value='tab-2'),
-                    ], colors={
-                        "border": "white",
-                        "primary": "gray",
-                        "background": "#e8e8e8"
-                    }),
-                    html.Div(id='tabs-content'),
+                    dcc.Tabs(
+                        id="tabs",
+                        value="tab-1",
+                        children=[
+                            dcc.Tab(label="Map", value="tab-1"),
+                            dcc.Tab(label="Table", value="tab-2"),
+                        ],
+                        colors={
+                            "border": "white",
+                            "primary": "gray",
+                            "background": "#e8e8e8",
+                        },
+                    ),
+                    html.Div(id="tabs-content"),
                 ],
             ),
-
             # html.Div(id="regions_table", className="row pretty_container table"),
         ],
     ),
@@ -133,7 +135,9 @@ layout = [
 # updates left indicator based on df updates
 @app.callback(Output("update_time", "children"), [Input("data_json", "data")])
 def time_update_callback(data_json):
-    current_update = datetime.strptime(data_json["current_update"], '%a %b %d %H:%M:%S %Y')
+    current_update = datetime.strptime(
+        data_json["current_update"], "%a %b %d %H:%M:%S %Y"
+    )
     return dcc.Markdown(f"**Last Update : {current_update}**")
 
 
@@ -142,7 +146,8 @@ def time_update_callback(data_json):
 def left_indicator_callback(data_json):
     return dcc.Markdown(
         "**<sup>{}</sup>/<sub>{}</sub>**".format(
-            data_json["data"]["Infected"], data_json["data"]["Infected"] + data_json["data"]["Tested"]
+            data_json["data"]["Infected"],
+            data_json["data"]["Infected"] + data_json["data"]["Tested"],
         ),
         dangerously_allow_html=True,
         style=dict(sub={"color": "blue"}),
@@ -231,7 +236,7 @@ def time_line_callback(data, _):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="Counter (people)", ticklen=5, gridwidth=2, ),
+        yaxis=dict(title="Counter (people)", ticklen=5, gridwidth=2,),
         legend=dict(x=0, y=1),
         margin={"t": 0, "b": 0, "l": 50, "r": 0},
         shapes=[
@@ -264,46 +269,51 @@ def time_line_callback(data, _):
     return dict(data=[infected_graph, Died_graph], layout=layout_comp)
 
 
-@app.callback(Output('tabs-content', 'children'),
-              [Input('tabs', 'value'), Input("data_json", "data")])
+@app.callback(
+    Output("tabs-content", "children"),
+    [Input("tabs", "value"), Input("data_json", "data")],
+)
 def render_content(tab, data):
-    if tab == 'tab-1':
-        return html.Div([
-            html.P("Infection Per regions"),
-            html.Div(
-                className="two columns dd-styles",
-                children=dcc.Dropdown(
-                    id="maps_dropdown",
-                    options=[
-                        {
-                            "label": "Map [" + map.replace("-", " ") + "]",
-                            "value": map,
-                        }
-                        for map in MAPS_LIST
-                    ],
-                    value="carto-positron",
-                    clearable=False,
+    if tab == "tab-1":
+        return html.Div(
+            [
+                html.P("Infection Per regions"),
+                html.Div(
+                    className="two columns dd-styles",
+                    children=dcc.Dropdown(
+                        id="maps_dropdown",
+                        options=[
+                            {
+                                "label": "Map [" + map.replace("-", " ") + "]",
+                                "value": map,
+                            }
+                            for map in MAPS_LIST
+                        ],
+                        value="carto-positron",
+                        clearable=False,
+                    ),
                 ),
-            ), dcc.Graph(
-                id="map",
-                config={
-                    "displaylogo": False,
-                    "modeBarButtonsToRemove": MODE_BAR_MAP_HIDES,
-                },
-            ),
-            dcc.Markdown(
-                f"**Note :** There is **No** political intention behind the used maps ,I choosed _stamen-watercolor_  Because it doesn have borders :)"
-            ),
-        ])
-    elif tab == 'tab-2':
+                dcc.Graph(
+                    id="map",
+                    config={
+                        "displaylogo": False,
+                        "modeBarButtonsToRemove": MODE_BAR_MAP_HIDES,
+                    },
+                ),
+                dcc.Markdown(
+                    f"**Note :** There is **No** political intention behind the used maps ,I choosed _stamen-watercolor_  Because it doesn have borders :)"
+                ),
+            ]
+        )
+    elif tab == "tab-2":
         df = pd.DataFrame.from_dict(data["data"]["tab_json"])
         df.rename(
-            columns={"Nombre de cas confirmés": "Confirmed Cases", "Région": "Province"},
+            columns={
+                "Nombre de cas confirmés": "Confirmed Cases",
+                "Région": "Province",
+            },
             inplace=True,
         )
         df["Confirmed Cases"] = df["Confirmed Cases"].astype("int32")
         df = df.reindex(columns=list(df.columns)[::-1])
-        return html.Div(children=[
-            html.P("Infection Per regions"),
-            df_to_table(df)
-        ])
+        return html.Div(children=[html.P("Infection Per regions"), df_to_table(df)])

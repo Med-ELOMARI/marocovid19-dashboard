@@ -20,7 +20,9 @@ app.layout = html.Div(
                         dcc.Markdown("**Maroc Covid-19**"),
                         html.Span(
                             id="subtitle",
-                            children=dcc.Markdown("&nbsp Data , insights and Predictions"),
+                            children=dcc.Markdown(
+                                "&nbsp Data , insights and Predictions"
+                            ),
                             style={"font-size": "1.8rem", "margin-top": "15px"},
                         ),
                     ],
@@ -72,7 +74,7 @@ def update_fields(_):
 
 # Update the index
 @app.callback(
-    [Output("body", "children"), Output("mobile_body", "children"), ],
+    [Output("body", "children"), Output("mobile_body", "children"),],
     [Input("url", "pathname")],
 )
 def display_page(pathname):
