@@ -268,10 +268,17 @@ table {
     }
 }
 
+
+@media (max-width: 500px) {
+
+    #update_time {
+        font-size: 90% !important;
+    }
+}
 @media (max-width: 450px) {
 
     .time_container{
-        align: right;
+        font-size: 70%;
     }
     .dropdown-styles {
         width: 28% !important;
@@ -346,6 +353,7 @@ table {
 
     #subtitle {
         display: block;
+        font-size: 1rem; !important;
     }
 
     #learn_more {

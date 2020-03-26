@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 import dash_table
 import pandas as pd
 from dash.dependencies import Input, Output, State
@@ -131,7 +133,8 @@ layout = [
 # updates left indicator based on df updates
 @app.callback(Output("update_time", "children"), [Input("data_json", "data")])
 def time_update_callback(data_json):
-    return dcc.Markdown("**Last Update : {}**".format(data_json["current_update"]))
+    current_update = datetime.strptime(data_json["current_update"], '%a %b %d %H:%M:%S %Y')
+    return dcc.Markdown(f"**Last Update : {current_update}**")
 
 
 # updates left indicator based on df updates
