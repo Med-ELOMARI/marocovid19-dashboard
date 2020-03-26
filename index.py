@@ -14,11 +14,10 @@ app.layout = html.Div(
         html.Div(
             className="row header",
             children=[
-                html.Button(id="menu", children=dcc.Markdown("&#8801")),
                 html.Span(
                     className="app-title",
                     children=[
-                        dcc.Markdown("**Covid-19 Maroc**"),
+                        dcc.Markdown("**Maroc Covid-19**"),
                         html.Span(
                             id="subtitle",
                             children=dcc.Markdown("&nbsp Data , insights and Predictions"),
