@@ -81,10 +81,10 @@ class Scrapper:
         return data.replace("\u200b", "").replace("\n", "")
 
 
-def convert_to_date(date):
+def convert_to_date(date, form  ="%Y-%m-%d"):
     """
     ctime to %Y-%m-%d
     :param date:
     :return: datetime object
     """
-    return datetime.strptime(str(date), "%a %b %d %H:%M:%S %Y").strftime("%Y-%m-%d")
+    return datetime.strptime(str(date), "%a %b %d %H:%M:%S %Y").strftime(form)
