@@ -8,7 +8,7 @@ from requests import get
 
 class Scrapper:
     """
-    Scrapper Class with  BeautifulSoup to parse the data from the specific url using the selectors
+    Scrapper Class with  BeautifulSoup to parse the data_ from the specific url using the selectors
     """
 
     def __init__(
@@ -61,8 +61,8 @@ class Scrapper:
         Tested = self.soup.select(self.Tested_selector)[0].getText()
         Infected = self.soup.select(self.Infected_selector)[0].getText()
         Recovered_Died = self.soup.select(self.Recovered_Died_selector)[0]
-        Recovered = Recovered_Died.select(self.Recovered_selector)[0].getText()
-        Died = Recovered_Died.select(self.Died_selector)[0].getText()
+        Recovered = Recovered_Died.contents[0].getText()
+        Died = Recovered_Died.contents[2].getText()
         tab = self.soup.find("table", self.table_selector)
         tab_json = self.get_table_as_json(tab)
         return dict(
