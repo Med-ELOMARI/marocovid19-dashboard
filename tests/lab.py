@@ -44,9 +44,9 @@ print(data)
 #
 # infected = [v["ConfirmedCases"] for _, v in data["raw"].items()]
 # Died = [v["Fatalities"] for _, v in data["raw"].items()]
-# dates = list(data["raw"].keys())
-# infected_graph = make_line_graph(dates, infected, "Infected", "blue")
-# Died_graph = make_line_graph(dates, Died, "Died", "red")
+# raw_data = list(data["raw"].keys())
+# infected_graph = make_line_graph(raw_data, infected, "Infected", "blue")
+# Died_graph = make_line_graph(raw_data, Died, "Died", "red")
 # layout_comp = go.Layout(
 #     title="Infected - Died",
 #     hovermode="closest",

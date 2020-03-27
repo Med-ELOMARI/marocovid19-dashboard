@@ -39,7 +39,7 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text",),
+            html.P(text, className="twelve columns indicator_text", ),
         ],
         className="four columns indicator pretty_container",
     )
@@ -73,7 +73,7 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
@@ -205,9 +205,13 @@ def make_line_graph(x, y, title, color):
 def time_line_callback(data, _):
     infected = [v["ConfirmedCases"] for _, v in data["raw"].items()]
     Died = [v["Fatalities"] for _, v in data["raw"].items()]
+    Recovered = [v["Recovered"] for _, v in data["raw"].items()]
     dates = list(data["raw"].keys())
-    infected_graph = make_line_graph(dates, infected, "Infected", "#fc8123")
-    Died_graph = make_line_graph(dates, Died, "Died", "red")
+    graphs = [
+        make_line_graph(dates, Recovered, "Recovered", "green"),
+        make_line_graph(dates, infected, "Infected", "#fc8123"),
+        make_line_graph(dates, Died, "Died", "red"),
+    ]
 
     layout_comp = go.Layout(
         title={
@@ -236,37 +240,11 @@ def time_line_callback(data, _):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="Counter (people)", ticklen=5, gridwidth=2,),
-        legend=dict(x=0, y=1),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        legend=dict(orientation="h", itemsizing="constant"),
         margin={"t": 0, "b": 0, "l": 50, "r": 0},
-        shapes=[
-            dict(
-                type="line",
-                xref="x1",
-                yref="y1",
-                x0=QUARANTINE_DATE,
-                y0=0,
-                x1=QUARANTINE_DATE,
-                y1=infected[-1],
-                line_width=2,
-                line_dash="dashdot",
-            ),
-        ],
-        annotations=[
-            dict(
-                x=QUARANTINE_DATE,
-                y=infected[-1] * 2 / 3,
-                xref="x",
-                yref="y",
-                text="Quarantine Started",
-                showarrow=True,
-                arrowhead=1,
-                ax=-80,
-                ay=-30,
-            )
-        ],
     )
-    return dict(data=[infected_graph, Died_graph], layout=layout_comp)
+    return dict(data=graphs, layout=layout_comp)
 
 
 @app.callback(
