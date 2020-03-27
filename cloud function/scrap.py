@@ -20,7 +20,11 @@ class Scrapper:
         Infected_selector,
         Recovered_Died_selector,
         table_selector,
+        Recovered_selector,
+        Died_selector,
     ):
+        self.Died_selector = Died_selector
+        self.Recovered_selector = Recovered_selector
         self.table_selector = table_selector
         self.Recovered_Died_selector = Recovered_Died_selector
         self.Infected_selector = Infected_selector
@@ -56,9 +60,9 @@ class Scrapper:
         )
         Tested = self.soup.select(self.Tested_selector)[0].getText()
         Infected = self.soup.select(self.Infected_selector)[0].getText()
-        Recovered, Died = (
-            self.soup.select(self.Recovered_Died_selector)[0].getText().split("\u200b")
-        )
+        Recovered_Died = self.soup.select(self.Recovered_Died_selector)[0]
+        Recovered = Recovered_Died.select(self.Recovered_selector)[0].getText()
+        Died = Recovered_Died.select(self.Died_selector)[0].getText()
         tab = self.soup.find("table", self.table_selector)
         tab_json = self.get_table_as_json(tab)
         return dict(

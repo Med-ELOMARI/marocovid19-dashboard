@@ -10,6 +10,8 @@ date_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-
 Tested_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(3) > p:nth-child(1)"
 Infected_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > p:nth-child(1)"
 Recovered_Died_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > p:nth-child(1)"
+Recovered_selector = ".ms-rteForeColor-6"
+Died_selector = ".ms-rteThemeForeColor-9-4"
 table_selector = {"class": "ms-rteTable-6"}
 
 
@@ -31,6 +33,8 @@ def function(request):
         Infected_selector,
         Recovered_Died_selector,
         table_selector,
+        Recovered_selector,
+        Died_selector,
     )
     data = sc.get_data()  # Scrapped Data
     morocco_data = morocco.get()  # snap from existing Data
@@ -56,14 +60,17 @@ def function(request):
         return "Noting to Update"
 
 
-# if __name__ == "__main__":
-#     sc = Scrapper(
-#         url,
-#         headers,
-#         date_selector,
-#         Tested_selector,
-#         Infected_selector,
-#         Recovered_Died_selector,
-#         table_selector,
-#     )
-#     data = sc.get_data()  # Scrapped Data
+if __name__ == "__main__":
+    sc = Scrapper(
+        url,
+        headers,
+        date_selector,
+        Tested_selector,
+        Infected_selector,
+        Recovered_Died_selector,
+        table_selector,
+        Recovered_selector,
+        Died_selector,
+    )
+    data = sc.get_data()  # Scrapped Data
+    print(data)
