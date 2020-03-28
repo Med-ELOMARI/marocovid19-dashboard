@@ -1,7 +1,7 @@
 # Dash
 Current Demo is here : [url](https://polar-refuge-68443.herokuapp.com/)
 
-![](images/Screenshot.png)
+![](https://api.apiflash.com/v1/urltoimage?access_key=72d704b7cedd4ee6b2b3bdd377bdfe30&format=png&response_type=image&scale_factor=1&url=https%3A%2F%2Fpolar-refuge-68443.herokuapp.com%2F)
  
 # Structure
 
