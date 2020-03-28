@@ -1,82 +1,24 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-import dash_table
-import pandas as pd
-from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
+import pandas as pd
+from dash.dependencies import Input, Output
 from plotly import graph_objs as go
 
 from app import app
-
-import plotly.express as px
-
-from fields import (
-    MODE_BAR_TIME_LINE_HIDES,
-    MAPS_LIST,
-    MODE_BAR_MAP_HIDES,
-    QUARANTINE_DATE,
+from fields import MODE_BAR_TIME_LINE_HIDES, DEFAULT_DROPDOWN_FIELDS
+from utilities import (
+    indicator,
+    morocco_map,
+    df_to_table,
+    make_line_graph,
+    get_field,
+    make_prediction_graph,
+    testing_area_maker,
+    make_map,
 )
-
-
-# return html Table with dataframe values
-def df_to_table(df):
-    return dash_table.DataTable(
-        id="table",
-        columns=[{"name": i, "id": i} for i in df.columns],
-        data=df.to_dict("records"),
-        style_cell={"textAlign": "left", "font_family": "Ubuntu", "font_size": "14px"},
-        style_data={"whiteSpace": "normal", "height": "auto"},
-        sort_action="native",
-        column_selectable="single",
-        sort_by=[dict(column_id=df.columns[-1], direction="desc")],
-    )
-
-
-# returns top indicator div
-def indicator(color, text, id_value, test=False):
-    return html.Div(
-        [
-            html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text", ),
-        ],
-        className="four columns indicator pretty_container",
-    )
-
-
-def preprocess(data, region_col, target):
-    cords = pd.DataFrame.from_dict(data["regions"])
-    regions = pd.DataFrame.from_dict(data["data"]["tab_json"])
-    regions = (
-        regions.set_index(region_col).join(cords.set_index("Region")).reset_index()
-    )
-    regions[target] = regions[target].astype("int32")
-    return regions
-
-
-# returns choropleth map figure based on status filter
-def morocco_map(map, data):
-    target = "Nombre de cas confirmés"
-    regions = preprocess(data, "Région", target)
-
-    fig = px.scatter_mapbox(
-        regions,
-        lat="Latitude",
-        lon="Longitude",
-        hover_name="Région",
-        hover_data=[target],
-        color=target,
-        size=target,
-        color_continuous_scale=["yellow", "orange", "red"],
-        zoom=3.7,
-        title="Regions Data",
-    )
-    fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    return dict(data=[fig.data[0]], layout=fig.layout)
-
 
 layout = [
     html.Div(
@@ -126,7 +68,10 @@ layout = [
                     html.Div(id="tabs-content"),
                 ],
             ),
-            # html.Div(id="regions_table", className="row pretty_container table"),
+            html.Div(
+                id="prediction_area", className="row pretty_container", children=[],
+            ),
+            html.Div(id="testing_area", className="row pretty_container", children=[],),
         ],
     ),
 ]
@@ -187,14 +132,30 @@ def map_callback(map, data_json):
     return morocco_map(map, data_json)
 
 
-def make_line_graph(x, y, title, color):
-    return go.Scatter(
-        x=x,
-        y=y,
-        mode="lines+markers",
-        marker=dict(size=3, line=dict(width=1), color=color),
-        name=title,
-    )
+# update heat map figure based on dropdown's value and df updates
+@app.callback(
+    Output("prediction_area", "children"),
+    [Input("loader", "children"), Input("data_json", "data")],
+)
+def prediction_area_callback(_, data_json):
+    return make_prediction_graph(data_json)
+
+
+# update heat map figure based on dropdown's value and df updates
+@app.callback(
+    Output("testing_area", "children"),
+    [Input("loader", "children"), Input("data_json", "data")],
+)
+def prediction_area_callback(_, data_json):
+    return testing_area_maker(DEFAULT_DROPDOWN_FIELDS, data_json)
+
+
+@app.callback(
+    Output("test_graph", "figure"),
+    [Input("data_json", "data"), Input("testing_dropdown_menu", "value")],
+)
+def testing_dropdown_menu_callback(data_json, search_value):
+    return testing_area_maker(search_value, data_json, update=True)
 
 
 # update pie chart figure based on dropdown's value and df updates
@@ -203,10 +164,11 @@ def make_line_graph(x, y, title, color):
     [Input("data_json", "data"), Input("loader", "children")],
 )
 def time_line_callback(data, _):
-    infected = [v["ConfirmedCases"] for _, v in data["raw"].items()]
-    Died = [v["Fatalities"] for _, v in data["raw"].items()]
-    Recovered = [v["Recovered"] for _, v in data["raw"].items()]
+    infected = get_field("ConfirmedCases", data["raw"])
+    Died = get_field("Fatalities", data["raw"])
+    Recovered = get_field("Recovered", data["raw"])
     dates = list(data["raw"].keys())
+
     graphs = [
         make_line_graph(dates, Recovered, "Recovered", "green"),
         make_line_graph(dates, infected, "Infected", "#fc8123"),
@@ -240,7 +202,7 @@ def time_line_callback(data, _):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
         legend=dict(orientation="h", itemsizing="constant"),
         margin={"t": 0, "b": 0, "l": 50, "r": 0},
     )
@@ -253,36 +215,7 @@ def time_line_callback(data, _):
 )
 def render_content(tab, data):
     if tab == "tab-1":
-        return html.Div(
-            [
-                html.P("Infection Per regions"),
-                html.Div(
-                    className="two columns dd-styles",
-                    children=dcc.Dropdown(
-                        id="maps_dropdown",
-                        options=[
-                            {
-                                "label": "Map [" + map.replace("-", " ") + "]",
-                                "value": map,
-                            }
-                            for map in MAPS_LIST
-                        ],
-                        value="carto-positron",
-                        clearable=False,
-                    ),
-                ),
-                dcc.Graph(
-                    id="map",
-                    config={
-                        "displaylogo": False,
-                        "modeBarButtonsToRemove": MODE_BAR_MAP_HIDES,
-                    },
-                ),
-                dcc.Markdown(
-                    f"**Note :** There is **No** political intention behind the used maps ,I choosed _stamen-watercolor_  Because it doesn have borders :)"
-                ),
-            ]
-        )
+        return html.Div(children=make_map())
     elif tab == "tab-2":
         df = pd.DataFrame.from_dict(data["data"]["tab_json"])
         df.rename(

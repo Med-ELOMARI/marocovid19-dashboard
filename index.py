@@ -1,8 +1,7 @@
-import json
-
-from dash.dependencies import Output, Input, State
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Output, Input, State
+
 import body
 from Database import morocco
 from app import app
@@ -54,6 +53,7 @@ app.layout = html.Div(
         html.Link(
             href="https://fonts.googleapis.com/css?family=Ubuntu", rel="stylesheet"
         ),
+        # html.Footer(className="row", children=[dcc.Markdown("**Developed by Mohamed EL Omari**")])
     ],
     className="row landscape_switcher",
     style={
@@ -74,10 +74,10 @@ def update_fields(_):
 
 # Update the index
 @app.callback(
-    [Output("body", "children"), Output("mobile_body", "children"),],
+    [Output("body", "children"), Output("mobile_body", "children")],
     [Input("url", "pathname")],
 )
-def display_page(pathname):
+def display_page(_):
     return body.layout, body.layout
 
 
@@ -96,4 +96,4 @@ def show_menu(n_clicks, tabs_style):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, port=80)
+    app.run_server(port=80)

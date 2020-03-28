@@ -31,3 +31,5 @@ MAPS_LIST = [
 ]
 
 QUARANTINE_DATE = "2020-03-20"
+
+DEFAULT_DROPDOWN_FIELDS = ["Morocco", "Spain", "France", "South Korea", "Italy"]
