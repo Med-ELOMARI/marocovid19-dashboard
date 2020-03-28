@@ -1,8 +1,9 @@
 /conf.json
-/data/
+/data_/
 /.idea/
 /cloud function/conf.json
 /ML/
 /ML/*
 ML/covid-19
 /cloud function/deploy.zip
+/Prediciton/
