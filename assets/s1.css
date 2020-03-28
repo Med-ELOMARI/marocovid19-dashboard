@@ -434,16 +434,25 @@ table {
         grid-column: 4 / 8;
     }
 
-    #regions_table {
+    #prediction_area {
         -ms-grid-row: 6;
         -ms-grid-row-span: 4;
         grid-row: 7 / 10;
         -ms-grid-column: 1;
         -ms-grid-column-span: 6;
-        grid-column: 1 / 4;
+        grid-column: 1 / 6;
         max-height: 500px;
     }
 
+     #testing_area {
+        -ms-grid-row: 6;
+        -ms-grid-row-span: 4;
+        grid-row: 7 / 10;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 6;
+        grid-column: 6 / 8;
+        max-height: 500px;
+    }
     #opportunity_grid {
         display: -ms-grid;
         display: grid;
