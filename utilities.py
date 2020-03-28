@@ -156,7 +156,7 @@ def testing_area_maker(selection, data, update=False):
     df = df.append(
         {
             "Country": "Morocco",
-            "Tests": data["data"]["Tested"],
+            "Tests": data["data"]["Tested"]+data["data"]["Infected"],
             "Date": convert_to_date(data["current_update"], to="%Y/%m/%d"),
         },
         ignore_index=True,
