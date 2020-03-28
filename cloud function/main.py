@@ -75,7 +75,7 @@ def function(request):
         return "Noting to Update"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(function(""))
 # if __name__ == "__main__":
 #     data = morocco.get()
