@@ -1,0 +1,13 @@
+{
+  "name": "Maroc Covid19 Dashboard",
+  "description": "Dashboard to follow the Covid19 Pandemic in Morocco",
+  "repository": "https://github.com/Med-ELOMARI/marocovid19-dashboard",
+  "logo": "https://raw.githubusercontent.com/Med-ELOMARI/marocovid19-dashboard/master/assets/favicon.ico",
+  "keywords": [
+    "python",
+    "dash",
+    "firebase",
+    "covid19",
+    "morocco"
+  ]
+}
