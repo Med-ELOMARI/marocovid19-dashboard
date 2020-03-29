@@ -18,6 +18,7 @@ from utilities import (
     make_prediction_graph,
     testing_area_maker,
     make_map,
+    make_death_ratio_graph,
 )
 
 layout = [
@@ -69,12 +70,75 @@ layout = [
                 ],
             ),
             html.Div(
-                id="prediction_area", className="row pretty_container", children=[],
+                id="prediction_area",
+                className="row pretty_container",
+                children=[
+                    html.Div(
+                        children=[
+                            dcc.Dropdown(
+                                id="method_dropdown_menu",
+                                options=[
+                                    {
+                                        "label": "Prediction Using Machine Learning - Gradient Boosting",
+                                        "value": "GB_MODEL",
+                                    },
+                                    {
+                                        "label": "Calculate Infected Using Deaths History and Mortality Rate ",
+                                        "value": "D_Ratio",
+                                    },
+                                    {
+                                        "label": "Prediction Using Machine Learning - Neural network (KERAS-based)",
+                                        "value": "NNK_MODEL",
+                                    },
+                                ],
+                                value="GB_MODEL",
+                                clearable=False,
+                            ),
+                            html.Div(
+                                id="deaths_ratio_input",
+                                children=[
+                                    html.P(
+                                        "Death Ratio (Mortality Rate %) :",
+                                        style={
+                                            "width": "12",
+                                            "display": "inline-block",
+                                            "margin-left": "10px",
+                                        },
+                                    ),
+                                    dcc.Input(
+                                        id="deaths_ratio_input_box",
+                                        value=1,
+                                        type="number",
+                                        min=0.01,
+                                        max=100,
+                                        step=0.01,
+                                        style={"padding": "4px", "margin-left": "1vw"},
+                                    ),
+                                ],
+                            ),
+                        ]
+                    ),
+                    dcc.Graph(
+                        id="pred_graph",
+                        config={
+                            "displaylogo": False,
+                            "modeBarButtonsToRemove": MODE_BAR_TIME_LINE_HIDES,
+                        },
+                    ),
+                ],
             ),
-            html.Div(id="testing_area", className="row pretty_container", children=[],),
+            html.Div(id="testing_area", className="row pretty_container", children=[], ),
         ],
     ),
 ]
+
+
+# updates left indicator based on df updates
+@app.callback(
+    Output("deaths_ratio_input", "hidden"), [Input("method_dropdown_menu", "value")]
+)
+def deaths_ratio_input_box_callback(value):
+    return value != "D_Ratio"
 
 
 # updates left indicator based on df updates
@@ -134,11 +198,40 @@ def map_callback(map, data_json):
 
 # update heat map figure based on dropdown's value and df updates
 @app.callback(
-    Output("prediction_area", "children"),
-    [Input("loader", "children"), Input("data_json", "data")],
+    Output("pred_graph", "figure"),
+    [
+        Input("loader", "children"),
+        Input("data_json", "data"),
+        Input("method_dropdown_menu", "value"),
+        Input("deaths_ratio_input_box", "value"),
+    ],
 )
-def prediction_area_callback(_, data_json):
-    return make_prediction_graph(data_json)
+def prediction_area_callback(_, data_json, type, ratio):
+    if type == "D_Ratio":
+        return make_death_ratio_graph(ratio, data_json)
+    elif type == "NNK_MODEL":
+        # return make_prediction_graph("Keras",data_json)
+        return dict(
+            data=[],
+            layout=dict(
+                annotations=[
+                    dict(
+                        name="bg",
+                        text="WILL BE ADDED SOON",
+                        textangle=-30,
+                        opacity=0.1,
+                        font=dict(color="black", size=50),
+                        xref="paper",
+                        yref="paper",
+                        x=0.5,
+                        y=0.5,
+                        showarrow=False,
+                    )
+                ]
+            ),
+        )
+    else:
+        return make_prediction_graph("GB_Predictor", data_json)
 
 
 # update heat map figure based on dropdown's value and df updates
@@ -202,7 +295,7 @@ def time_line_callback(data, _):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
         legend=dict(orientation="h", itemsizing="constant"),
         margin={"t": 0, "b": 0, "l": 50, "r": 0},
     )
