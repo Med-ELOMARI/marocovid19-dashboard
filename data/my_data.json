@@ -1,0 +1,790 @@
+{
+  "maroc" : {
+    "current_update" : "Sat Mar 28 18:00:00 2020",
+    "data" : {
+      "Died" : 24,
+      "Infected" : 359,
+      "Recovered" : 11,
+      "Tested" : 1461,
+      "date" : "Sat Mar 28 18:00:00 2020",
+      "tab_json" : [ {
+        "Nombre de cas confirmés" : "10",
+        "Région" : "Beni Mellal-Khénifra"
+      }, {
+        "Nombre de cas confirmés" : "107",
+        "Région" : "Casa Settat"
+      }, {
+        "Nombre de cas confirmés" : "5",
+        "Région" : "Daraa-tafilalet"
+      }, {
+        "Nombre de cas confirmés" : "0",
+        "Région" : "Dakhla-Oued Ed Dahab"
+      }, {
+        "Nombre de cas confirmés" : "63",
+        "Région" : "Fès meknes"
+      }, {
+        "Nombre de cas confirmés" : "1",
+        "Région" : "Guelmim Oued Noun"
+      }, {
+        "Nombre de cas confirmés" : "0",
+        "Région" : "Laâyoune-Sakia El Hamra"
+      }, {
+        "Nombre de cas confirmés" : "62",
+        "Région" : "Marrakech Safi"
+      }, {
+        "Nombre de cas confirmés" : "13",
+        "Région" : "Oriental"
+      }, {
+        "Nombre de cas confirmés" : "64",
+        "Région" : "Rabat Salé Kenitra"
+      }, {
+        "Nombre de cas confirmés" : "11",
+        "Région" : "Souss-Massa"
+      }, {
+        "Nombre de cas confirmés" : "23",
+        "Région" : "Tanger Tetouan Al Hoceima"
+      } ]
+    },
+    "history" : {
+      "Fri Mar 27 21:00:00 2020" : {
+        "Died" : 23,
+        "Infected" : 345,
+        "Recovered" : 11,
+        "Tested" : 1423,
+        "date" : "Fri Mar 27 21:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "10",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "107",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "5",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "63",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "57",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "12",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "56",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "11",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "23",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Mon Mar 23 11:00:00 2020" : {
+        "Died" : 4,
+        "Infected" : 122,
+        "Recovered" : 3,
+        "Tested" : 523,
+        "date" : "Mon Mar 23 11:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmé​s" : "3",
+          "​Région​​" : "Beni Mellal-Khénifra​"
+        }, {
+          "Nombre de cas confirmé​s" : "27",
+          "​Région​​" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmé​s" : "​1​",
+          "​Région​​" : "​​Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmé​s" : "0​",
+          "​Région​​" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmé​s" : "26",
+          "​Région​​" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmé​s" : "1",
+          "​Région​​" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmé​s" : "0",
+          "​Région​​" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmé​s" : "13",
+          "​Région​​" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmé​s" : "​5",
+          "​Région​​" : "Oriental"
+        }, {
+          "Nombre de cas confirmé​s" : "32",
+          "​Région​​" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmé​s" : "6",
+          "​Région​​" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmé​s" : "8​",
+          "​Région​​" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Mon Mar 23 12:30:00 2020" : {
+        "Died" : 4,
+        "Infected" : 134,
+        "Recovered" : 3,
+        "Tested" : 571,
+        "date" : "Mon Mar 23 12:30:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "3",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "34",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "29",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "15",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "5",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "32",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "6",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "8",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Mon Mar 23 18:00:00 2020" : {
+        "Died" : 4,
+        "Infected" : 143,
+        "Recovered" : 5,
+        "Tested" : 643,
+        "date" : "Mon Mar 23 18:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "3",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "34",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "35",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "15",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "7",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "32",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "6",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "9",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Sat Mar 28 08:00:00 2020" : {
+        "Died" : 23,
+        "Infected" : 358,
+        "Recovered" : 11,
+        "Tested" : 1455,
+        "date" : "Sat Mar 28 08:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "10",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "107",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "5",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "63",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "62",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "13",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "63",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "11",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "23",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Sat Mar 28 13:00:00 2020" : {
+        "Died" : 23,
+        "Infected" : 358,
+        "Recovered" : 11,
+        "Tested" : 1455,
+        "date" : "Sat Mar 28 13:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "10",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "107",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "5",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "63",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "62",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "13",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "63",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "11",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "23",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Sun Mar 22 14:30:00 2020" : {
+        "Died" : 3,
+        "Infected" : 109,
+        "Recovered" : 3,
+        "Tested" : 498,
+        "date" : "Sun Mar 22 14:30:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmé​s" : "3",
+          "​Région​​" : "Beni Mellal-Khénifra​"
+        }, {
+          "Nombre de cas confirmé​s" : "24​",
+          "​Région​​" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmé​s" : "​1​",
+          "​Région​​" : "​​Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmé​s" : "0​",
+          "​Région​​" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmé​s" : "21",
+          "​Région​​" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmé​s" : "1",
+          "​Région​​" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmé​s" : "0",
+          "​Région​​" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmé​s" : "13",
+          "​Région​​" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmé​s" : "​5",
+          "​Région​​" : "Oriental"
+        }, {
+          "Nombre de cas confirmé​s" : "28",
+          "​Région​​" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmé​s" : "6",
+          "​Région​​" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmé​s" : "7",
+          "​Région​​" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Sun Mar 22 20:30:00 2020" : {
+        "Died" : 4,
+        "Infected" : 115,
+        "Recovered" : 3,
+        "Tested" : 512,
+        "date" : "Sun Mar 22 20:30:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmé​s" : "3",
+          "​Région​​" : "Beni Mellal-Khénifra​"
+        }, {
+          "Nombre de cas confirmé​s" : "26",
+          "​Région​​" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmé​s" : "​1​",
+          "​Région​​" : "​​Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmé​s" : "0​",
+          "​Région​​" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmé​s" : "24",
+          "​Région​​" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmé​s" : "1",
+          "​Région​​" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmé​s" : "0",
+          "​Région​​" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmé​s" : "13",
+          "​Région​​" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmé​s" : "​5",
+          "​Région​​" : "Oriental"
+        }, {
+          "Nombre de cas confirmé​s" : "29",
+          "​Région​​" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmé​s" : "6",
+          "​Région​​" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmé​s" : "7",
+          "​Région​​" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Thu Mar 26 18:00:00 2020" : {
+        "Died" : 10,
+        "Infected" : 275,
+        "Recovered" : 8,
+        "Tested" : 931,
+        "date" : "Thu Mar 26 18:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "7",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "87",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "3",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "51",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "43",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "7",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "50",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "10",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "16",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Tue Mar 24 18:00:00 2020" : {
+        "Died" : 5,
+        "Infected" : 170,
+        "Recovered" : 6,
+        "Tested" : 685,
+        "date" : "Tue Mar 24 18:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "4",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "42",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "36",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "22",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "7",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "40",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "6",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "11",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Wed Mar 25 17:00:00 2020" : {
+        "Died" : 6,
+        "Infected" : 225,
+        "Recovered" : 7,
+        "Tested" : 740,
+        "date" : "Wed Mar 25 17:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "4",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "42",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "36",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "22",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "7",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "40",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "6",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "11",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      },
+      "Wed Mar 25 18:00:00 2020" : {
+        "Died" : 6,
+        "Infected" : 225,
+        "Recovered" : 7,
+        "Tested" : 740,
+        "date" : "Wed Mar 25 18:00:00 2020",
+        "tab_json" : [ {
+          "Nombre de cas confirmés" : "6",
+          "Région" : "Beni Mellal-Khénifra"
+        }, {
+          "Nombre de cas confirmés" : "59",
+          "Région" : "Casa Settat"
+        }, {
+          "Nombre de cas confirmés" : "2",
+          "Région" : "Daraa-tafilalet"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Dakhla-Oued Ed Dahab"
+        }, {
+          "Nombre de cas confirmés" : "50",
+          "Région" : "Fès meknes"
+        }, {
+          "Nombre de cas confirmés" : "1",
+          "Région" : "Guelmim Oued Noun"
+        }, {
+          "Nombre de cas confirmés" : "0",
+          "Région" : "Laâyoune-Sakia El Hamra"
+        }, {
+          "Nombre de cas confirmés" : "32",
+          "Région" : "Marrakech Safi"
+        }, {
+          "Nombre de cas confirmés" : "7",
+          "Région" : "Oriental"
+        }, {
+          "Nombre de cas confirmés" : "45",
+          "Région" : "Rabat Salé Kenitra"
+        }, {
+          "Nombre de cas confirmés" : "8",
+          "Région" : "Souss-Massa"
+        }, {
+          "Nombre de cas confirmés" : "15",
+          "Région" : "Tanger Tetouan Al Hoceima"
+        } ]
+      }
+    },
+    "predictions" : {
+      "GB_Predictor" : {
+        "2020-03-29" : 408.0,
+        "2020-03-30" : 486.0,
+        "2020-03-31" : 517.0,
+        "2020-04-01" : 588.0,
+        "2020-04-02" : 698.0,
+        "2020-04-03" : 750.0,
+        "2020-04-04" : 860.0,
+        "2020-04-05" : 987.0,
+        "2020-04-06" : 1046.0,
+        "2020-04-07" : 1158.0
+      }
+    },
+    "raw" : {
+      "2020-03-01" : {
+        "ConfirmedCases" : 0.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-02" : {
+        "ConfirmedCases" : 1.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-03" : {
+        "ConfirmedCases" : 1.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-04" : {
+        "ConfirmedCases" : 1.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-05" : {
+        "ConfirmedCases" : 2.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-06" : {
+        "ConfirmedCases" : 2.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-07" : {
+        "ConfirmedCases" : 2.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-08" : {
+        "ConfirmedCases" : 2.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-09" : {
+        "ConfirmedCases" : 2.0,
+        "Fatalities" : 0.0,
+        "Recovered" : 0
+      },
+      "2020-03-10" : {
+        "ConfirmedCases" : 3.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 0
+      },
+      "2020-03-11" : {
+        "ConfirmedCases" : 5.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 0
+      },
+      "2020-03-12" : {
+        "ConfirmedCases" : 6.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 0
+      },
+      "2020-03-13" : {
+        "ConfirmedCases" : 7.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 1
+      },
+      "2020-03-14" : {
+        "ConfirmedCases" : 17.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 1
+      },
+      "2020-03-15" : {
+        "ConfirmedCases" : 28.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 1
+      },
+      "2020-03-16" : {
+        "ConfirmedCases" : 29.0,
+        "Fatalities" : 1.0,
+        "Recovered" : 1
+      },
+      "2020-03-17" : {
+        "ConfirmedCases" : 38.0,
+        "Fatalities" : 2.0,
+        "Recovered" : 1
+      },
+      "2020-03-18" : {
+        "ConfirmedCases" : 49.0,
+        "Fatalities" : 2.0,
+        "Recovered" : 1
+      },
+      "2020-03-19" : {
+        "ConfirmedCases" : 63.0,
+        "Fatalities" : 2.0,
+        "Recovered" : 1
+      },
+      "2020-03-20" : {
+        "ConfirmedCases" : 77.0,
+        "Fatalities" : 3.0,
+        "Recovered" : 1
+      },
+      "2020-03-21" : {
+        "ConfirmedCases" : 96.0,
+        "Fatalities" : 3.0,
+        "Recovered" : 3
+      },
+      "2020-03-22" : {
+        "ConfirmedCases" : 115,
+        "Fatalities" : 4,
+        "Recovered" : 3
+      },
+      "2020-03-23" : {
+        "ConfirmedCases" : 143,
+        "Fatalities" : 4,
+        "Recovered" : 5,
+        "Tested" : 643
+      },
+      "2020-03-24" : {
+        "ConfirmedCases" : 170,
+        "Fatalities" : 5,
+        "Recovered" : 6,
+        "Tested" : 685
+      },
+      "2020-03-25" : {
+        "ConfirmedCases" : 225,
+        "Fatalities" : 6,
+        "Recovered" : 7,
+        "Tested" : 740
+      },
+      "2020-03-26" : {
+        "ConfirmedCases" : 275,
+        "Fatalities" : 10,
+        "Recovered" : 8,
+        "Tested" : 931
+      },
+      "2020-03-27" : {
+        "ConfirmedCases" : 345,
+        "Fatalities" : 23,
+        "Recovered" : 11,
+        "Tested" : 1423
+      },
+      "2020-03-28" : {
+        "ConfirmedCases" : 359,
+        "Fatalities" : 24,
+        "Recovered" : 11,
+        "Tested" : 1461
+      }
+    },
+    "regions" : [ {
+      "Latitude" : 34.02,
+      "Longitude" : -6.83,
+      "Region" : "Rabat Salé Kenitra"
+    }, {
+      "Latitude" : 33.59,
+      "Longitude" : -7.61,
+      "Region" : "Casa Settat"
+    }, {
+      "Latitude" : 34.03712,
+      "Longitude" : -5.002964,
+      "Region" : "Fès meknes"
+    }, {
+      "Latitude" : 31.63,
+      "Longitude" : -8.0,
+      "Region" : "Marrakech Safi"
+    }, {
+      "Latitude" : 30.42144,
+      "Longitude" : -9.583039,
+      "Region" : "Souss-Massa"
+    }, {
+      "Latitude" : 35.783621,
+      "Longitude" : -5.809643,
+      "Region" : "Tanger Tetouan Al Hoceima"
+    }, {
+      "Latitude" : 32.320296,
+      "Longitude" : -6.380926,
+      "Region" : "Beni Mellal-Khénifra "
+    }, {
+      "Latitude" : 34.68,
+      "Longitude" : -1.91,
+      "Region" : "Oriental"
+    }, {
+      "Latitude" : 28.986355,
+      "Longitude" : -10.057375,
+      "Region" : "Guelmim Oued Noun"
+    }, {
+      "Latitude" : 31.932124,
+      "Longitude" : -4.424149,
+      "Region" : "Daraa-tafilalet"
+    }, {
+      "Latitude" : 27.158507,
+      "Longitude" : -13.207878,
+      "Region" : "Laâyoune-Sakia El Hamra"
+    }, {
+      "Latitude" : 23.692847,
+      "Longitude" : -15.938255,
+      "Region" : "Dakhla-Oued Ed Dahab"
+    } ]
+  }
+}

@@ -127,7 +127,7 @@ layout = [
                     ),
                 ],
             ),
-            html.Div(id="testing_area", className="row pretty_container", children=[], ),
+            html.Div(id="testing_area", className="row pretty_container", children=[],),
         ],
     ),
 ]
@@ -295,7 +295,7 @@ def time_line_callback(data, _):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
         legend=dict(orientation="h", itemsizing="constant"),
         margin={"t": 0, "b": 0, "l": 50, "r": 0},
     )
