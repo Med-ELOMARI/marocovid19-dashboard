@@ -93,9 +93,10 @@ class GB_Predictor(Processor):
 
 
 if __name__ == "__main__":
-    with open("Data/my_data2.json", "rb") as f:
+    with open("../Data/my_data.json", "rb") as f:
         data = json.load(f)
 
-    p = GB_Predictor(data["raw"], "model.pkl")
+    p = GB_Predictor(data["maroc"]["raw"], "model.pkl")
+    print(p.model)
     r = p.predict(10)
     print(r)
