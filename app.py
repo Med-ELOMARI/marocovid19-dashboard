@@ -6,5 +6,23 @@ app = dash.Dash(
 
 app.title = "Maroc Covid19"
 app.config.suppress_callback_exceptions = True
-# app.scripts.config.serve_locally = False
-# app.scripts.append_script({"external_url": "https://cdn.plot.ly/plotly-locale-ar-latest.js"})
+
+app.index_string = """
+<!DOCTYPE html>
+<html>
+    <head>
+        {%metas%}
+        <title>{%title%}</title>
+        {%favicon%}
+        {%css%}
+    </head>
+    <body>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+    </body>
+</html>
+"""

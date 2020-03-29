@@ -15,6 +15,7 @@ from fields import (
     DEFAULT_DROPDOWN_FIELDS,
     MODE_BAR_MAP_HIDES,
     MAPS_LIST,
+    QUARANTINE_DATE,
 )
 
 COVID_19_TESTS_COUNTRY = pd.read_csv("data/covid-19-tests-country.csv")
@@ -47,6 +48,7 @@ def make_line_graph(x, y, title, color, dash=False):
         marker=dict(size=3, line=dict(width=1), color=color),
         name=title,
         line_dash="dash" if dash else None,
+        # legend_,bgcolor ="rgba(0,0,0,0)"
     )
 
 
@@ -69,7 +71,7 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text",),
+            html.P(text, className="twelve columns indicator_text", ),
         ],
         className="four columns indicator pretty_container",
     )
@@ -103,13 +105,71 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
 
-def make_prediction_graph(data: dict):
-    preds: dict = data["predictions"]["GB_Predictor"]
+def make_death_ratio_graph(ratio: int, data: dict):
+    deaths = get_field("Fatalities", data["raw"])
+    calculated_infections = [d * 100 / ratio for d in deaths]
+    y = get_field("ConfirmedCases", data["raw"])
+    graphs = [
+        make_line_graph(
+            x=list(data["raw"].keys()), y=y, title="Current Infected", color="#fc8123",
+        ),
+        make_line_graph(
+            x=list(data["raw"].keys()),
+            y=calculated_infections,
+            title=f"Calculated With Ratio ({ratio} %)",
+            color="navy",
+        ),
+    ]
+
+    layout_comp = go.Layout(
+        title={
+            "text": f"Infected Using Deaths History with Mortality Ratio {ratio}%",
+            "xanchor": "center",
+            "yanchor": "bottom",
+        },
+        hovermode="closest",
+        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date", ),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
+        shapes=[
+            dict(
+                type="line",
+                xref="x1",
+                yref="y1",
+                x0=QUARANTINE_DATE,
+                y0=0,
+                x1=QUARANTINE_DATE,
+                y1=calculated_infections[-1],
+                line_width=2,
+                line_dash="dashdot",
+            ),
+        ],
+        annotations=[
+            dict(
+                x=QUARANTINE_DATE,
+                y=calculated_infections[-1] * 2 / 3,
+                xref="x",
+                yref="y",
+                text="Quarantine Started",
+                showarrow=True,
+                arrowhead=1,
+                ax=-80,
+                ay=-30,
+            )
+        ],
+        margin={"r": 0, "l": 50, "t": 50, "b": 50},
+    )
+
+    return dict(data=graphs, layout=layout_comp)
+
+
+def make_prediction_graph(predictions: str, data: dict):
+    preds: dict = data["predictions"][predictions]
     graphs = [
         make_line_graph(
             x=list(preds.keys()),
@@ -125,30 +185,47 @@ def make_prediction_graph(data: dict):
             color="#fc8123",
         ),
     ]
+
     layout_comp = go.Layout(
         title={
-            "text": f"Predictions of infected People ( Till {list(preds.keys())[-1]} )",
-            "y": 0.9,
-            "x": 0.5,
+            "text": f"Predictions of infected People next 10 Days ( Till {list(preds.keys())[-1]} )",
             "xanchor": "center",
             "yanchor": "bottom",
         },
         hovermode="closest",
-        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date",),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
-        legend=dict(orientation="h", itemsizing="constant"),
+        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date", ),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
+        shapes=[
+            dict(
+                type="line",
+                xref="x1",
+                yref="y1",
+                x0=QUARANTINE_DATE,
+                y0=0,
+                x1=QUARANTINE_DATE,
+                y1=list(preds.values())[-1],
+                line_width=2,
+                line_dash="dashdot",
+            ),
+        ],
+        annotations=[
+            dict(
+                x=QUARANTINE_DATE,
+                y=list(preds.values())[-1] * 2 / 3,
+                xref="x",
+                yref="y",
+                text="Quarantine Started",
+                showarrow=True,
+                arrowhead=1,
+                ax=-80,
+                ay=-30,
+            )
+        ],
+        margin={"r": 0, "l": 50, "t": 50, "b": 50},
     )
 
-    return [
-        dcc.Graph(
-            id="pred_graph",
-            figure=dict(data=graphs, layout=layout_comp),
-            config={
-                "displaylogo": False,
-                "modeBarButtonsToRemove": MODE_BAR_TIME_LINE_HIDES,
-            },
-        )
-    ]
+    return dict(data=graphs, layout=layout_comp)
 
 
 def testing_area_maker(selection, data, update=False):
@@ -156,7 +233,7 @@ def testing_area_maker(selection, data, update=False):
     df = df.append(
         {
             "Country": "Morocco",
-            "Tests": data["data"]["Tested"]+data["data"]["Infected"],
+            "Tests": data["data"]["Tested"] + data["data"]["Infected"],
             "Date": convert_to_date(data["current_update"], to="%Y/%m/%d"),
         },
         ignore_index=True,
@@ -213,7 +290,7 @@ def make_map():
             children=dcc.Dropdown(
                 id="maps_dropdown",
                 options=[
-                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map,}
+                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map, }
                     for map in MAPS_LIST
                 ],
                 value="carto-positron",
