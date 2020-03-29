@@ -1,9 +1,11 @@
+import json
+
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Output, Input, State
 
 import body
-from Database import morocco
+import project_details
 from app import app
 
 server = app.server
@@ -53,23 +55,48 @@ app.layout = html.Div(
         html.Link(
             href="https://fonts.googleapis.com/css?family=Ubuntu", rel="stylesheet"
         ),
-        # html.Footer(className="row", children=[dcc.Markdown("**Developed by Mohamed EL Omari**")])
+        html.Footer(
+            id="header",
+            className="row header",
+            children=[
+                html.A(
+                    dcc.Markdown("**Developed by Mohamed EL Omari**"),
+                    href="https://elomari.ml",
+                    target="_blank",
+                    style={"padding-left": "5rem", "padding-right": "5rem"},
+                ),
+                html.A(
+                    dcc.Markdown("**Project Details**"),
+                    href="/project_details",
+                    target="_blank",
+                    style={"padding-right": "5rem"},
+                ),
+                html.A(
+                    dcc.Markdown("**Github Repository**"),
+                    href="https://github.com/Med-ELOMARI/marocovid19-dashboard",
+                    target="_blank",
+                    style={"padding-right": "5rem", "padding-left": "5rem"},
+                ),
+            ],
+        ),
     ],
-    className="row landscape_switcher",
+    className="row",
     style={
-        # "margin": "0%",
         # "background-image": 'url(/assets/header.png)',
         # "background-size": "cover",
         # "background-attachment": "fixed",
-        # "background-position": "center"
-        "background-color": "#e8e8e8"
+        # "background-position": "center",
+        "background-color": "#28282a"
     },
 )
 
 
 @app.callback(Output("data_json", "data"), [Input("loader", "children")])
 def update_fields(_):
-    return morocco.get()
+    # return morocco.get()
+    with open("data/my_data.json", "rb") as f:
+        data = json.load(f)
+    return data["maroc"]
 
 
 # Update the index
@@ -77,7 +104,9 @@ def update_fields(_):
     [Output("body", "children"), Output("mobile_body", "children")],
     [Input("url", "pathname")],
 )
-def display_page(_):
+def display_page(pathname):
+    if pathname == "/project_details":
+        return project_details.layout, project_details.layout
     return body.layout, body.layout
 
 
@@ -96,4 +125,4 @@ def show_menu(n_clicks, tabs_style):
 
 
 if __name__ == "__main__":
-    app.run_server(port=80)
+    app.run_server(debug=True, port=80)
