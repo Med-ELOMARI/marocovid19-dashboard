@@ -24,6 +24,15 @@ body {
     border: 1px solid #f1f1f1;
 }
 
+.details_container {
+    border-radius: 15px;
+    background-color: white;
+    margin: 0.5rem;
+    padding: 1rem;
+    position: relative;
+    border: 1px solid #f1f1f1;
+}
+
 input {
     padding: 0.5rem 0;
     border-radius: 5px;
@@ -252,7 +261,7 @@ table {
     }
 
     .image_size {
-        width: 320px;
+        width: 80vw
     }
 }
 
@@ -264,9 +273,7 @@ table {
     }
 
     .image_size {
-        width: 400px;
-        overflow: hidden;
-
+        width: 80vw;
     }
 }
 
@@ -282,9 +289,7 @@ table {
     }
 
     .image_size {
-        width: 400px;
-        overflow: hidden;
-
+        width: 80vw
     }
 
     .app-title {
@@ -322,8 +327,7 @@ table {
     }
 
     .image_size {
-        width: 800px;
-        overflow: hidden;
+        width: 80vw
     }
 
     #opportunity_grid,
@@ -468,6 +472,15 @@ table {
         -ms-grid-column: 1;
         -ms-grid-column-span: 6;
         grid-column: 6 / 8;
+        max-height: 500px;
+    }
+    #sources {
+        -ms-grid-row: 6;
+        -ms-grid-row-span: 4;
+        grid-row: 10 / 10;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 6;
+        grid-column: 1 / 8;
         max-height: 500px;
     }
 

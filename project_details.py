@@ -11,10 +11,10 @@ README = README.replace(
     "Please Open the project in github then click the button from there \n\n[![Deploy]",
 )
 layout = html.Div(
-    className="pretty_container",
+    className="details_container",
     children=[
         html.Img(
-            id="image_size", className="image_size", src="assets/images/structure.png"
+            id="image_size", className="image_size", src="assets/images/structure_phone.png"
         ),
         dcc.Markdown(README),
     ],

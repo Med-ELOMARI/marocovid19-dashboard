@@ -38,6 +38,12 @@ app.layout = html.Div(
                         "grid-column": "3 / 7",
                     },
                 ),
+                html.A(
+                    id="language",
+                    children=html.Button("العربية"),
+                    href="/Arabic",
+                    style={"margin-left": "1vh"}
+                ),
             ],
         ),
         dcc.Store(id="data_json"),  # in memory json Data
@@ -71,12 +77,6 @@ app.layout = html.Div(
                     href="/project_details",
                     target="_blank",
                     style={"padding-right": "5rem"},
-                ),
-                html.A(
-                    dcc.Markdown("**Github Repository**"),
-                    href="https://github.com/Med-ELOMARI/marocovid19-dashboard",
-                    target="_blank",
-                    style={"padding-right": "5rem", "padding-left": "5rem"},
                 ),
             ],
         ),

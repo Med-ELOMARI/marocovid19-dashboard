@@ -1,4 +1,7 @@
 # Dash
+
+This Dashboard is an initiative to give better presentation to the data available on the internet .
+  
 Current Demo is here : [url](https://polar-refuge-68443.herokuapp.com/)
 
 ![](assets/images/Screenshot.png)
@@ -44,10 +47,6 @@ Run the app
 python index.py
 
 ```
-
-## About the App
-
-This Dashboard is an initiative to give better presentation to the data available on the internet  
 
 ## Built With
 

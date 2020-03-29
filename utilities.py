@@ -48,7 +48,7 @@ def make_line_graph(x, y, title, color, dash=False):
         marker=dict(size=3, line=dict(width=1), color=color),
         name=title,
         line_dash="dash" if dash else None,
-        # legend_,bgcolor ="rgba(0,0,0,0)"
+        # legend=dict(bgcolor="rgba(0,0,0,0)")
     )
 
 
@@ -71,7 +71,7 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text",),
+            html.P(text, className="twelve columns indicator_text", ),
         ],
         className="four columns indicator pretty_container",
     )
@@ -105,7 +105,7 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
@@ -128,13 +128,13 @@ def make_death_ratio_graph(ratio: int, data: dict):
 
     layout_comp = go.Layout(
         title={
-            "text": f"Infected Using Deaths History with Mortality Ratio {ratio}%",
+            "text": f"Estimating Infections  Using Deaths History with Mortality Ratio {ratio}%",
             "xanchor": "center",
             "yanchor": "bottom",
         },
         hovermode="closest",
-        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date",),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
+        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date", ),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
         legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
         shapes=[
             dict(
@@ -193,9 +193,9 @@ def make_prediction_graph(predictions: str, data: dict):
             "yanchor": "bottom",
         },
         hovermode="closest",
-        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date",),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
-        legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
+        legend=dict(x=0, y=1, orientation="v", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
+        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date", ),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
         shapes=[
             dict(
                 type="line",
@@ -290,7 +290,7 @@ def make_map():
             children=dcc.Dropdown(
                 id="maps_dropdown",
                 options=[
-                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map,}
+                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map, }
                     for map in MAPS_LIST
                 ],
                 value="carto-positron",

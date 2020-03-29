@@ -127,7 +127,8 @@ layout = [
                     ),
                 ],
             ),
-            html.Div(id="testing_area", className="row pretty_container", children=[],),
+            html.Div(id="testing_area", className="row pretty_container", children=[], ),
+            html.Div(id="sources", className="row pretty_container", children=[dcc.Markdown(open("RESOURCES.md").read())], ),
         ],
     ),
 ]
@@ -271,8 +272,6 @@ def time_line_callback(data, _):
     layout_comp = go.Layout(
         title={
             "text": "Time Line of Infected and Died",
-            "y": 0.9,
-            "x": 0.5,
             "xanchor": "center",
             "yanchor": "bottom",
         },
@@ -283,7 +282,7 @@ def time_line_callback(data, _):
             zeroline=False,
             gridwidth=2,
             range=[dates[-22], dates[-1]],
-            rangeselector=dict(
+            rangeselector=dict( x=0, y=1,
                 buttons=list(
                     [
                         dict(count=7, label="Week", step="day", stepmode="backward"),
@@ -295,9 +294,9 @@ def time_line_callback(data, _):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
-        legend=dict(orientation="h", itemsizing="constant"),
-        margin={"t": 0, "b": 0, "l": 50, "r": 0},
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        legend=dict(x=0, y=1, orientation="v", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
+        margin={"t": 50, "b": 0, "l": 50, "r": 0},
     )
     return dict(data=graphs, layout=layout_comp)
 
