@@ -1,17 +1,16 @@
 # Dash
 Current Demo is here : [url](https://polar-refuge-68443.herokuapp.com/)
 
-![](https://api.apiflash.com/v1/urltoimage?access_key=72d704b7cedd4ee6b2b3bdd377bdfe30&format=png&response_type=image&scale_factor=1&url=https%3A%2F%2Fpolar-refuge-68443.herokuapp.com%2F)
+![](assets/images/Screenshot.png)
  
 # Structure
 
-![](images/structure.png)
+![](assets/images/structure.png)
 
 the conf.json for cloud function not included (only read-only.json) 
 ## Getting Started
 
 ### Deploy this app to your account
-
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -47,6 +46,8 @@ python index.py
 ```
 
 ## About the App
+
+This Dashboard is an initiative to give better presentation to the data available on the internet  
 
 ## Built With
 
