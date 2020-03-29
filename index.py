@@ -6,6 +6,7 @@ from dash.dependencies import Output, Input, State
 
 import body
 import project_details
+from Database import morocco
 from app import app
 
 server = app.server
@@ -93,10 +94,10 @@ app.layout = html.Div(
 
 @app.callback(Output("data_json", "data"), [Input("loader", "children")])
 def update_fields(_):
-    # return morocco.get()
-    with open("data/my_data.json", "rb") as f:
-        data = json.load(f)
-    return data["maroc"]
+    return morocco.get()
+    # with open("data/my_data.json", "rb") as f:
+    #     data = json.load(f)
+    # return data["maroc"]
 
 
 # Update the index
