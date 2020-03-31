@@ -1,8 +1,8 @@
 # Sources :
 
-Live Data from : [www.covidmaroc.ma](www.covidmaroc.ma)
+Live Data from : [www.covidmaroc.ma](http://www.covidmaroc.ma)
 
-Covid19 Testing Data : [www.ourworldindata.org/covid-testing](www.ourworldindata.org/covid-testing)
+Covid19 Testing Data : [www.ourworldindata.org/covid-testing](http://www.ourworldindata.org/covid-testing)
 
 Prediction Using [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) - [Gradient Boosting](https://en.wikipedia.org/wiki/Gradient_boosting) :
 

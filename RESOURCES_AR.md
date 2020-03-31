@@ -1,8 +1,8 @@
 # مصادر :
 
-بيانات مباشرة من: : [www.covidmaroc.ma](www.covidmaroc.ma)
+بيانات مباشرة من: : [http://www.covidmaroc.ma](http://www.covidmaroc.ma)
 
-بيانات اختبار Covid 19:  [www.ourworldindata.org/covid-testing](www.ourworldindata.org/covid-testing)
+بيانات اختبار Covid 19:  [http://www.ourworldindata.org/covid-testing](http://www.ourworldindata.org/covid-testing)
 
 التنبؤ باستخدام  [التعلم الالي](https://ar.wikipedia.org/wiki/%D8%AA%D8%B9%D9%84%D9%85_%D8%A2%D9%84%D9%8A) - [تعزيز التدرج](https://en.wikipedia.org/wiki/Gradient_boosting) :
 
