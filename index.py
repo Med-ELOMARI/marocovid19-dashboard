@@ -8,11 +8,13 @@ import body
 import project_details
 from Database import morocco
 from app import app
+from languages import English, Arabic
 
 server = app.server
 
 app.layout = html.Div(
     [
+        dcc.Location(id="url", refresh=False),
         html.Div(
             className="row header",
             children=[
@@ -40,14 +42,15 @@ app.layout = html.Div(
                 ),
                 html.A(
                     id="language",
-                    children=html.Button("العربية"),
+                    children=html.Button("العربية", id="language_btn"),
                     href="/Arabic",
-                    style={"margin-left": "1vh"}
+                    style={"margin-left": "1vh"},
                 ),
             ],
         ),
         dcc.Store(id="data_json"),  # in memory json Data
-        dcc.Location(id="url", refresh=False),
+        dcc.Store(id="language_json", data=English),  # in session json Data
+        # dcc.Store(id="language_json", type="session"),  # in session json Data
         html.Div(id="body"),
         html.Link(
             href="https://use.fontawesome.com/releases/v5.2.0/css/all.css",
@@ -92,23 +95,38 @@ app.layout = html.Div(
 )
 
 
+@app.callback(
+    [
+        Output("language_btn", "children"),
+        Output("language", "href"),
+        Output("language_json", "data"),
+    ],
+    [Input("url", "pathname")],
+)
+def update_output(pathname):
+    if pathname == "/Arabic":
+        # Button text - href - json to use in display
+        return "English", "/", Arabic
+    else:
+        # Button text - href - json to use in display
+        return "العربية", "/Arabic", English
+
+
 @app.callback(Output("data_json", "data"), [Input("loader", "children")])
 def update_fields(_):
     return morocco.get()
-    # with open("data/my_data.json", "rb") as f:
-    #     data = json.load(f)
-    # return data["maroc"]
 
 
 # Update the index
 @app.callback(
     [Output("body", "children"), Output("mobile_body", "children")],
-    [Input("url", "pathname")],
+    [Input("url", "pathname"), Input("language_json", "data")],
 )
-def display_page(pathname):
+def display_page(pathname, language_json):
     if pathname == "/project_details":
         return project_details.layout, project_details.layout
-    return body.layout, body.layout
+    else:
+        return body.get_layout(language_json), body.get_layout(language_json)
 
 
 @app.callback(

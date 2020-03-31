@@ -14,7 +14,9 @@ layout = html.Div(
     className="details_container",
     children=[
         html.Img(
-            id="image_size", className="image_size", src="assets/images/structure_phone.png"
+            id="image_size",
+            className="image_size",
+            src="assets/images/structure_phone.png",
         ),
         dcc.Markdown(README),
     ],

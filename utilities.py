@@ -71,7 +71,7 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text", ),
+            html.P(text, className="twelve columns indicator_text",),
         ],
         className="four columns indicator pretty_container",
     )
@@ -105,36 +105,45 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
 
-def make_death_ratio_graph(ratio: int, data: dict):
+def make_death_ratio_graph(ratio: int, data: dict, language: dict):
     deaths = get_field("Fatalities", data["raw"])
     calculated_infections = [d * 100 / ratio for d in deaths]
     y = get_field("ConfirmedCases", data["raw"])
     graphs = [
         make_line_graph(
-            x=list(data["raw"].keys()), y=y, title="Current Infected", color="#fc8123",
+            x=list(data["raw"].keys()),
+            y=y,
+            title=language.get("Current Infected"),
+            color="#fc8123",
         ),
         make_line_graph(
             x=list(data["raw"].keys()),
             y=calculated_infections,
-            title=f"Calculated With Ratio ({ratio} %)",
+            title=f"{language.get('Calculated With Ratio')}({ratio}%)",
             color="navy",
         ),
     ]
 
     layout_comp = go.Layout(
         title={
-            "text": f"Estimating Infections  Using Deaths History with Mortality Ratio {ratio}%",
+            "text": f"{language.get('Estimation_title')} ({ratio}%)",
             "xanchor": "center",
             "yanchor": "bottom",
         },
         hovermode="closest",
-        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date", ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        xaxis=dict(
+            title=language.get("Time"),
+            ticklen=5,
+            zeroline=False,
+            gridwidth=2,
+            type="date",
+        ),
+        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2,),
         legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
         shapes=[
             dict(
@@ -155,7 +164,7 @@ def make_death_ratio_graph(ratio: int, data: dict):
                 y=calculated_infections[-1] * 2 / 3,
                 xref="x",
                 yref="y",
-                text="Quarantine Started",
+                text=language.get("Quarantine Started"),
                 showarrow=True,
                 arrowhead=1,
                 ax=-80,
@@ -168,34 +177,42 @@ def make_death_ratio_graph(ratio: int, data: dict):
     return dict(data=graphs, layout=layout_comp)
 
 
-def make_prediction_graph(predictions: str, data: dict):
+def make_prediction_graph(predictions: str, data: dict, language: dict):
     preds: dict = data["predictions"][predictions]
     graphs = [
         make_line_graph(
             x=list(preds.keys()),
             y=list(preds.values()),
-            title="Prediction",
+            title=language.get("Prediction"),
             color="purple",
             dash=True,
         ),
         make_line_graph(
             x=list(data["raw"].keys()),
             y=get_field("ConfirmedCases", data["raw"]),
-            title="Current Infected",
+            title=language.get("Current Infected"),
             color="#fc8123",
         ),
     ]
 
     layout_comp = go.Layout(
         title={
-            "text": f"Predictions of infected People next 10 Days ( Till {list(preds.keys())[-1]} )",
+            "text": f"{language.get('predicition_graph_title')} {list(preds.keys())[-1]} )",
             "xanchor": "center",
             "yanchor": "bottom",
         },
         hovermode="closest",
-        legend=dict(x=0, y=1, orientation="v", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
-        xaxis=dict(title="Time", ticklen=5, zeroline=False, gridwidth=2, type="date", ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
+        legend=dict(
+            x=0, y=1, orientation="v", itemsizing="constant", bgcolor="rgba(0,0,0,0)"
+        ),
+        xaxis=dict(
+            title=language.get("Time"),
+            ticklen=5,
+            zeroline=False,
+            gridwidth=2,
+            type="date",
+        ),
+        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2,),
         shapes=[
             dict(
                 type="line",
@@ -215,7 +232,7 @@ def make_prediction_graph(predictions: str, data: dict):
                 y=list(preds.values())[-1] * 2 / 3,
                 xref="x",
                 yref="y",
-                text="Quarantine Started",
+                text=language.get("Quarantine Started"),
                 showarrow=True,
                 arrowhead=1,
                 ax=-80,
@@ -224,11 +241,12 @@ def make_prediction_graph(predictions: str, data: dict):
         ],
         margin={"r": 0, "l": 50, "t": 50, "b": 50},
     )
-
     return dict(data=graphs, layout=layout_comp)
 
 
-def testing_area_maker(selection, data, update=False):
+def testing_area_maker(
+    selection, data, language, update=False,
+):
     df = COVID_19_TESTS_COUNTRY
     df = df.append(
         {
@@ -242,6 +260,7 @@ def testing_area_maker(selection, data, update=False):
 
     df = df[df["Country"].isin(selection)]
 
+    print(df)
     fig = px.bar(
         df,
         y="Country",
@@ -251,14 +270,18 @@ def testing_area_maker(selection, data, update=False):
         hover_data=["Date"],
         text="Tests",
         labels=["Date"],
-        title={
-            "text": "Testing for COVID-19",
-            "xanchor": "center",
-            "yanchor": "bottom",
-        },
+        title={"text": language.get("Testing_title"),},
     )
-    fig.update_layout(yaxis={"categoryorder": "total ascending"})
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(
+        xaxis=dict(title=language.get("Tests_per_country")),
+        yaxis=dict(
+            title=language.get("Countries"),
+            ticklen=5,
+            gridwidth=2,
+            categoryorder="total ascending",
+        ),
+        margin={"r": 0, "t": 0, "l": 0, "b": 0},
+    )
 
     if update:
         return dict(data=[fig.data[0]], layout=fig.layout)
@@ -282,15 +305,15 @@ def testing_area_maker(selection, data, update=False):
     ]
 
 
-def make_map():
+def make_map(language):
     return [
-        html.P("Infection Per regions"),
+        dcc.Markdown(f"{language.get('Choose_map')}:"),
         html.Div(
             className="two columns dd-styles",
             children=dcc.Dropdown(
                 id="maps_dropdown",
                 options=[
-                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map, }
+                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map,}
                     for map in MAPS_LIST
                 ],
                 value="carto-positron",
@@ -304,7 +327,5 @@ def make_map():
                 "modeBarButtonsToRemove": MODE_BAR_MAP_HIDES,
             },
         ),
-        dcc.Markdown(
-            f"**Note :** There is **No** political intention behind the used maps ,I choosed _stamen-watercolor_  Because it doesn have borders :)"
-        ),
+        dcc.Markdown(f"{language.get('note')}"),
     ]

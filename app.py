@@ -1,5 +1,7 @@
 import dash
 
+from languages import English
+
 app = dash.Dash(
     __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}],
 )
