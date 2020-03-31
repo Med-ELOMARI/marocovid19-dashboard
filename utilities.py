@@ -260,7 +260,6 @@ def testing_area_maker(
 
     df = df[df["Country"].isin(selection)]
 
-    print(df)
     fig = px.bar(
         df,
         y="Country",
