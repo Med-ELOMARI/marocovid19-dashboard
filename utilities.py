@@ -5,7 +5,6 @@ import dash_html_components as html
 import dash_table
 import pandas as pd
 import dash_core_components as dcc
-import plotly
 
 import plotly.express as px
 from plotly import graph_objs as go
@@ -25,6 +24,15 @@ COVID_19_TESTS_COUNTRY = COVID_19_TESTS_COUNTRY.rename(
 COVID_19_TESTS_COUNTRY["Date"] = COVID_19_TESTS_COUNTRY["Date"].apply(
     lambda x: datetime.strptime(str(x), "%b %d, %Y").strftime("%Y/%m/%d")
 )
+
+NEW_DF = pd.read_csv("data/full-list-total-tests-for-covid-19.csv")
+
+NEW_DF = NEW_DF.rename(
+    columns={"Entity": "Country", "Cumulative total tests": "Tests"}
+)
+NEW_DF = NEW_DF.groupby(["Country"]).sum()
+
+COVID_19_TESTS_COUNTRY.append(NEW_DF)
 
 
 def get_field(field, data):
@@ -71,7 +79,7 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text",),
+            html.P(text, className="twelve columns indicator_text", ),
         ],
         className="four columns indicator pretty_container",
     )
@@ -105,7 +113,7 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
@@ -143,7 +151,7 @@ def make_death_ratio_graph(ratio: int, data: dict, language: dict):
             gridwidth=2,
             type="date",
         ),
-        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2,),
+        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2, ),
         legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
         shapes=[
             dict(
@@ -212,7 +220,7 @@ def make_prediction_graph(predictions: str, data: dict, language: dict):
             gridwidth=2,
             type="date",
         ),
-        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2,),
+        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2, ),
         shapes=[
             dict(
                 type="line",
@@ -245,7 +253,7 @@ def make_prediction_graph(predictions: str, data: dict, language: dict):
 
 
 def testing_area_maker(
-    selection, data, language, update=False,
+        selection, data, language, update=False,
 ):
     df = COVID_19_TESTS_COUNTRY
     df = df.append(
@@ -269,7 +277,7 @@ def testing_area_maker(
         hover_data=["Date"],
         text="Tests",
         labels=["Date"],
-        title={"text": language.get("Testing_title"),},
+        title={"text": language.get("Testing_title"), },
     )
     fig.update_layout(
         xaxis=dict(title=language.get("Tests_per_country")),
@@ -301,6 +309,8 @@ def testing_area_maker(
                 "modeBarButtonsToRemove": MODE_BAR_TIME_LINE_HIDES,
             },
         ),
+        dcc.Markdown(
+            "**Note:** There are substantial differences across countries in terms of the units, whether or not all labs are included, Details for each country can be found at [link](https://ourworldindata.org/covid-testing)")
     ]
 
 
@@ -312,7 +322,7 @@ def make_map(language):
             children=dcc.Dropdown(
                 id="maps_dropdown",
                 options=[
-                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map,}
+                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map, }
                     for map in MAPS_LIST
                 ],
                 value="carto-positron",
