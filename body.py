@@ -91,19 +91,20 @@ def get_layout(language: dict):
                                     id="method_dropdown_menu",
                                     options=[
                                         {
-                                            "label": language.get("pred_drop_1"),
-                                            "value": "GB_MODEL",
-                                        },
-                                        {
                                             "label": language.get("pred_drop_2"),
                                             "value": "D_Ratio",
                                         },
+                                        {
+                                            "label": language.get("pred_drop_1"),
+                                            "value": "GB_MODEL",
+                                        },
+
                                         {
                                             "label": language.get("pred_drop_3"),
                                             "value": "NNK_MODEL",
                                         },
                                     ],
-                                    value="GB_MODEL",
+                                    value="D_Ratio",
                                     clearable=False,
                                 ),
                                 html.Div(
@@ -157,7 +158,7 @@ def get_layout(language: dict):
                             dangerously_allow_html=True,
                         )
                     ],
-                ),
+                )
             ],
         ),
     ]
@@ -343,7 +344,7 @@ def time_line_callback(data, _, language):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
         legend=dict(
             x=0, y=1, orientation="v", itemsizing="constant", bgcolor="rgba(0,0,0,0)"
         ),
