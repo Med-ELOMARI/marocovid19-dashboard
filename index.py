@@ -3,6 +3,7 @@ import json
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Output, Input, State
+from flask import make_response, jsonify
 
 import body
 import project_details
@@ -141,6 +142,15 @@ def show_menu(n_clicks, tabs_style):
         else:
             tabs_style["display"] = "none"
     return tabs_style
+
+
+@server.route('/wakeup')
+def wakeup():
+    """
+    a work around to wake up the server each 30 minutes by an external Cron job
+    :return:
+    """
+    return make_response(jsonify(dict(status=True)), 200)
 
 
 if __name__ == "__main__":
