@@ -12,16 +12,16 @@ class Scrapper:
     """
 
     def __init__(
-        self,
-        url,
-        headers,
-        date_selector,
-        Tested_selector,
-        Infected_selector,
-        Recovered_Died_selector,
-        table_selector,
-        Recovered_selector,
-        Died_selector,
+            self,
+            url,
+            headers,
+            date_selector,
+            Tested_selector,
+            Infected_selector,
+            Recovered_Died_selector,
+            table_selector,
+            Recovered_selector,
+            Died_selector,
     ):
         self.Died_selector = Died_selector
         self.Recovered_selector = Recovered_selector
@@ -58,11 +58,15 @@ class Scrapper:
         date = self.parse_date(
             self.soup.select(self.date_selector)[0].getText().strip()
         )
-        Tested = self.soup.select(self.Tested_selector)[0].getText()
-        Infected = self.soup.select(self.Infected_selector)[0].getText()
-        Recovered_Died = self.soup.select(self.Recovered_Died_selector)[0]
-        Recovered = Recovered_Died.contents[0].getText()
-        Died = Recovered_Died.contents[2].getText()
+        try:
+            Tested = self.soup.select(self.Tested_selector)[0].getText()
+            Infected = self.soup.select(self.Infected_selector)[0].getText()
+            Recovered_Died = self.soup.select(self.Recovered_Died_selector)[0]
+            Recovered = Recovered_Died.contents[0].getText()
+            Died = Recovered_Died.contents[2].getText()
+        except:
+            resp = get(url="https://covidma.herokuapp.com/api").json()[0]
+            Tested, Infected, Recovered, Died = resp["negative"], resp["confirmed"], resp["recovered"], resp["deaths"]
         tab = self.soup.find("table", self.table_selector)
         tab_json = self.get_table_as_json(tab)
         return dict(
@@ -82,7 +86,7 @@ class Scrapper:
         :return:
         """
         # Todo Fix encoding and remove clean function
-        return data.replace("\u200b", "").replace("\n", "")
+        return data.replace("\u200b", "").replace("\n", "") if isinstance(data, str) else data
 
 
 def convert_to_date(date, form="%Y-%m-%d"):
