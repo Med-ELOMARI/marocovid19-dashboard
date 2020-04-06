@@ -77,26 +77,43 @@ def indicator(color, text, id_value, test=False):
     return html.Div(
         [
             html.P(id=id_value, className="indicator_value", style=dict(color=color)),
-            html.P(text, className="twelve columns indicator_text",),
+            html.P(text, className="twelve columns indicator_text", ),
         ],
         className="four columns indicator pretty_container",
     )
 
 
+def get_newest_date(dates):
+    form = "%a %b  %d %H:%M:%S %Y"
+    return max([(datetime.strptime(date, form), date) for date in dates], key=lambda x: x[1])[1]
+
+
+def get_regions_data(data):
+    if data["data"]['tab_json'].get('status', False):
+        last_date_we_have = get_newest_date(data["history"].keys())
+        regions = data["history"][last_date_we_have]['tab_json']
+        Stamp = f"Old Data<br>Last Update {last_date_we_have}"
+    else:
+        regions = data["data"]["tab_json"]
+        Stamp = None
+    return pd.DataFrame.from_dict(regions), Stamp
+
+
 def preprocess(data, region_col, target):
     cords = pd.DataFrame.from_dict(data["regions"])
-    regions = pd.DataFrame.from_dict(data["data"]["tab_json"])
+    regions, Stamp = get_regions_data(data)
     regions = (
         regions.set_index(region_col).join(cords.set_index("Region")).reset_index()
     )
     regions[target] = regions[target].astype("int32")
-    return regions
+
+    return regions, Stamp
 
 
 # returns choropleth map figure based on status filter
 def morocco_map(map, data):
     target = "Nombre de cas confirmés"
-    regions = preprocess(data, "Région", target)
+    regions, Stamp = preprocess(data, "Région", target)
 
     fig = px.scatter_mapbox(
         regions,
@@ -111,7 +128,21 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(coloraxis_colorbar=dict(title="Infections",))
+    fig.update_layout(annotations=[
+        dict(
+            name="bg",
+            text=Stamp,
+            textangle=-30,
+            opacity=0.5,
+            font=dict(color="black", size=20),
+            xref="paper",
+            yref="paper",
+            x=0.5,
+            y=0.5,
+            showarrow=False,
+        )
+    ])
+    fig.update_layout(coloraxis_colorbar=dict(title="Infections", ))
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return dict(data=[fig.data[0]], layout=fig.layout)
 
@@ -149,7 +180,7 @@ def make_death_ratio_graph(ratio: int, data: dict, language: dict):
             gridwidth=2,
             type="date",
         ),
-        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2,),
+        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2, ),
         legend=dict(orientation="h", itemsizing="constant", bgcolor="rgba(0,0,0,0)"),
         shapes=[
             dict(
@@ -218,7 +249,7 @@ def make_prediction_graph(predictions: str, data: dict, language: dict):
             gridwidth=2,
             type="date",
         ),
-        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2,),
+        yaxis=dict(title=language.get("People Counter"), ticklen=5, gridwidth=2, ),
         shapes=[
             dict(
                 type="line",
@@ -251,7 +282,7 @@ def make_prediction_graph(predictions: str, data: dict, language: dict):
 
 
 def testing_area_maker(
-    selection, data, language, update=False,
+        selection, data, language, update=False,
 ):
     df = COVID_19_TESTS_COUNTRY
     df = df.append(
@@ -275,7 +306,7 @@ def testing_area_maker(
         hover_data=["Date"],
         text="Tests",
         labels=["Date"],
-        title={"text": language.get("Testing_title"),},
+        title={"text": language.get("Testing_title"), },
     )
     fig.update_layout(
         xaxis=dict(title=language.get("Tests_per_country")),
@@ -321,7 +352,7 @@ def make_map(language):
             children=dcc.Dropdown(
                 id="maps_dropdown",
                 options=[
-                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map,}
+                    {"label": "Map [" + map.replace("-", " ") + "]", "value": map, }
                     for map in MAPS_LIST
                 ],
                 value="carto-positron",

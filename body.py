@@ -19,7 +19,7 @@ from utilities import (
     testing_area_maker,
     make_map,
     make_death_ratio_graph,
-)
+    get_regions_data)
 
 
 def get_layout(language: dict):
@@ -343,7 +343,7 @@ def time_line_callback(data, _, language):
             rangeslider=dict(visible=True, autorange=True),
             type="date",
         ),
-        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2,),
+        yaxis=dict(title="People Counter", ticklen=5, gridwidth=2, ),
         legend=dict(
             x=0, y=1, orientation="v", itemsizing="constant", bgcolor="rgba(0,0,0,0)"
         ),
@@ -364,7 +364,7 @@ def render_content(tab, data, language):
     if tab == "tab-1":
         return html.Div(children=make_map(language))
     elif tab == "tab-2":
-        df = pd.DataFrame.from_dict(data["data"]["tab_json"])
+        df, message = get_regions_data(data)
         df.rename(
             columns={
                 "Nombre de cas confirmés": "Confirmed Cases",
@@ -376,7 +376,7 @@ def render_content(tab, data, language):
         df = df.reindex(columns=list(df.columns)[::-1])
         return html.Div(
             children=[
-                html.P(language.get("Infections_per_regions_table")),
+                html.P(message if message else language.get("Infections_per_regions_table")),
                 df_to_table(df),
             ]
         )
