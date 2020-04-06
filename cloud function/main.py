@@ -1,13 +1,20 @@
+import hashlib
+
 from gb_predictor import GB_Predictor
 from scrap import Scrapper, convert_to_date
 
 from Database import morocco
 
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
+
+software_names = [SoftwareName.CHROME.value]
+operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value]
+
+user_agent_rotator = UserAgent(software_names=software_names, operating_systems=operating_systems, limit=100)
+
 url = "http://www.covidmaroc.ma/Pages/AccueilAR.aspx"
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"
-}
-date_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > p:nth-child(1) > font:nth-child(1)"
+date_selector = "#WebPartWPQ1 > div.ms-rtestate-field > div:nth-child(1) > table > tbody > tr:nth-child(1) > td > p"
 Tested_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(3) > p:nth-child(1)"
 Infected_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > p:nth-child(1)"
 Recovered_Died_selector = "#WebPartWPQ1 > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1) > p:nth-child(1)"
@@ -27,6 +34,10 @@ def update_predictions():
         return f"Error {str(e)}"
 
 
+def get_hash(data):
+    return hashlib.md5(str(data).encode("utf-8")).hexdigest()
+
+
 def function(request):
     """Responds to any HTTP request.
     Args:
@@ -36,6 +47,9 @@ def function(request):
         Response object using
         `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
     """
+    headers = {
+        "User-Agent": user_agent_rotator.get_random_user_agent()
+    }
 
     sc = Scrapper(
         url,
@@ -50,8 +64,19 @@ def function(request):
     )
     data = sc.get_data()  # Scrapped Data
     morocco_data = morocco.get()  # snap from existing Data
-    current_update = morocco_data["current_update"]
-    if current_update != data["date"]:
+    new_hash = get_hash(
+        str(data['Tested'])
+        + str(data['Died'])
+        + str(data['Infected'])
+        + str(data['Recovered'])
+    )
+    old_hash = get_hash(
+        str(morocco_data["data"]["Tested"])
+        + str(morocco_data["data"]["Died"])
+        + str(morocco_data["data"]["Infected"])
+        + str(morocco_data["data"]["Recovered"])
+    )
+    if new_hash != old_hash:
         morocco.update(dict(current_update=data["date"]))
         morocco.child("history").update(
             {morocco_data["data"]["date"]: morocco_data["data"]}
@@ -68,13 +93,12 @@ def function(request):
             }
         )
         msg = update_predictions()
-
         return f"OK , Updated to {data['date']}  | Prediction :{msg}"
-
     else:
         return "Noting to Update"
 
 
+#
 if __name__ == "__main__":
     print(function(""))
 # if __name__ == "__main__":

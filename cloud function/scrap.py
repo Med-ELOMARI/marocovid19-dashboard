@@ -64,11 +64,20 @@ class Scrapper:
             Recovered_Died = self.soup.select(self.Recovered_Died_selector)[0]
             Recovered = Recovered_Died.contents[0].getText()
             Died = Recovered_Died.contents[2].getText()
-        except:
+        except Exception as e:
+            print(e)
             resp = get(url="https://covidma.herokuapp.com/api").json()[0]
-            Tested, Infected, Recovered, Died = resp["negative"], resp["confirmed"], resp["recovered"], resp["deaths"]
+            Tested, Infected, Recovered, Died = (
+                resp["negative"],
+                resp["confirmed"],
+                resp["recovered"],
+                resp["deaths"],
+            )
         tab = self.soup.find("table", self.table_selector)
-        tab_json = self.get_table_as_json(tab)
+        try:
+            tab_json = self.get_table_as_json(tab)
+        except ValueError:
+            tab_json = '{"status":"No tables found"}'
         return dict(
             date=date,
             Tested=int(self.clean(Tested)),
@@ -86,7 +95,11 @@ class Scrapper:
         :return:
         """
         # Todo Fix encoding and remove clean function
-        return data.replace("\u200b", "").replace("\n", "") if isinstance(data, str) else data
+        return (
+            data.replace("\u200b", "").replace("\n", "")
+            if isinstance(data, str)
+            else str(data)
+        )
 
 
 def convert_to_date(date, form="%Y-%m-%d"):
