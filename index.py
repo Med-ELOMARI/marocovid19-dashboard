@@ -144,7 +144,7 @@ def show_menu(n_clicks, tabs_style):
     return tabs_style
 
 
-@server.route('/wakeup')
+@server.route("/wakeup")
 def wakeup():
     """
     a work around to wake up the server each 30 minutes by an external Cron job

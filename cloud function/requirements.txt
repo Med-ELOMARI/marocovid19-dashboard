@@ -6,3 +6,4 @@ beautifulsoup4
 lxml
 html5lib
 joblib
+random_user_agent
