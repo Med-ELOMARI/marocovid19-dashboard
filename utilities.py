@@ -89,7 +89,7 @@ def get_newest_date(dates):
 
 
 def get_regions_data(data):
-    if data["data"]['tab_json'].get('status', False):
+    if not isinstance(data["data"]['tab_json'], list):
         last_date_we_have = get_newest_date(data["history"].keys())
         regions = data["history"][last_date_we_have]['tab_json']
         Stamp = f"Old Data<br>Last Update {last_date_we_have}"
@@ -128,7 +128,8 @@ def morocco_map(map, data):
         title="Regions Data",
     )
     fig.update_layout(mapbox_style=map)
-    fig.update_layout(annotations=[
+    if Stamp:
+        fig.update_layout(annotations=[
         dict(
             name="bg",
             text=Stamp,
